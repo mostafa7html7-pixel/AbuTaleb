@@ -1,0 +1,994 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <!-- <script src="coi-serviceworker.js"></script> --> <!-- تم تعطيله مؤقتاً لحل مشاكل التحميل في الموبايل -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>مصطفى أبو طالب | Abqarieno - أقوى ملف شخصي 2026</title>
+    <link rel="icon" type="image/svg+xml" href="bx-android.svg">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Reem+Kufi:wght@400;700&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
+    <!-- Three.js Library & Loaders -->
+    <script async src="https://unpkg.com/es-module-shims@1.6.3/dist/es-module-shims.js" crossorigin="anonymous"></script>
+    <script type="importmap">
+      {
+        "imports": {
+          "three": "https://unpkg.com/three@0.150.1/build/three.module.js",
+          "three/addons/": "https://unpkg.com/three@0.150.1/examples/jsm/"
+        }
+      }
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/vanilla-tilt/1.8.1/vanilla-tilt.min.js" crossorigin="anonymous"></script>
+    <style>
+        /* Global Styles */
+        :root {
+            --bg-color: #000000;
+            --emoji-font: "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+            --primary-accent: #FF0000; /* العودة للأحمر القوي */
+            --secondary-accent: #FFD700; /* الذهبي المتوهج */
+            --text-color-bright: #FFFFFF;
+            --text-color-light: #e0e0e0;
+            --brown-accent: #3E2723;
+            --glass-bg: rgba(20, 0, 0, 0.7);
+            --glass-border: rgba(255, 0, 0, 0.3);
+            --transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+            /* ألوان منصات التواصل */
+            --whatsapp: #25D366;
+            --messenger: #0084FF;
+            --fb: #1877F2;
+            --yt: #FF0000;
+            --accent: #FF0000;
+        }
+        * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+        html, body { margin: 0; padding: 0; background-color: var(--bg-color); color: var(--text-color-light); font-family: 'Reem Kufi', var(--emoji-font), sans-serif; overflow-x: hidden; scroll-behavior: smooth; max-width: 100%; }
+        body { padding-top: 100px; }
+        .hero-title, .section-title, .logo, .cta-btn, .loader-text { font-family: 'Reem Kufi', sans-serif; }
+        h1, h2, h3 { color: var(--text-color-bright); }
+        a { text-decoration: none; color: inherit; transition: color 0.3s; }
+        ul { list-style: none; padding: 0; margin: 0; }
+        img { max-width: 100%; height: auto; }
+
+        /* Gemini Custom Cursor */
+        html, body {
+            cursor: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="%23FF0000"><path d="M12 2l2.4 7.6L22 12l-7.6 2.4L12 22l-2.4-7.6L2 12l7.6-2.4z"/></svg>') 12 12, auto;
+        }
+        a, button, .cta-btn, .skill-item, #theme-toggle, .menu-toggle, input, textarea {
+            cursor: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="%23FFD700"><path d="M12 2l2.4 7.6L22 12l-7.6 2.4L12 22l-2.4-7.6L2 12l7.6-2.4z"/></svg>') 12 12, pointer;
+        }
+
+        /* Preloader */
+        #preloader { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: #000; z-index: 9999; display: flex; justify-content: center; align-items: center; color: white; transition: opacity 0.5s, visibility 0.5s; }
+        .loader-content { text-align: center; }
+        .loader-text { font-size: 3rem; font-weight: 700; color: var(--primary-accent); text-shadow: 0 0 10px var(--primary-accent); }
+        .loading-bar-container { width: 200px; height: 5px; background: var(--brown-accent); margin: 20px auto; border-radius: 5px; overflow: hidden; }
+        .loading-bar { width: 0%; height: 100%; background: var(--primary-accent); transition: width 0.1s; }
+        .loading-percentage { font-size: 0.8rem; }
+
+        /* Layout Utilities */
+        .full-vh { padding: 60px 20px; display: flex; flex-direction: column; justify-content: center; align-items: center; box-sizing: border-box; }
+        .section-title { font-size: 2.5rem; text-align: center; margin-bottom: 30px; text-shadow: 0 0 5px var(--primary-accent); }
+        .reveal-on-scroll { opacity: 0; transform: translateY(30px); transition: opacity 0.6s, transform 0.6s; }
+        .reveal-on-scroll.active { opacity: 1; transform: translateY(0); }
+
+        /* Glassmorphism Classes */
+        .glass-card { 
+            background: var(--glass-bg); 
+            border: 1px solid var(--glass-border); 
+            border-radius: 15px; 
+            backdrop-filter: blur(15px); 
+            -webkit-backdrop-filter: blur(15px); 
+            padding: 20px; 
+            box-shadow: 0 8px 32px 0 rgba(255, 0, 0, 0.2); 
+        }
+
+        /* 3D Iridescent Glass Cards - Global Professional Style */
+        .iridescent-card {
+            position: relative;
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.05), rgba(255, 0, 0, 0.03), rgba(255, 215, 0, 0.03));
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            overflow: hidden;
+            transform-style: preserve-3d;
+            perspective: 1000px;
+        }
+        .iridescent-card::after { /* Noise Texture Layer */
+            content: '';
+            position: absolute;
+            inset: 0;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+            opacity: 0.05;
+            pointer-events: none;
+        }
+        .card-glow { /* Border Trace Effect */
+            position: absolute;
+            inset: -1px;
+            background: radial-gradient(400px circle at var(--mouse-x) var(--mouse-y), rgba(255, 215, 0, 0.3), transparent 40%);
+            z-index: 0;
+            pointer-events: none;
+        }
+        .card-content { position: relative; z-index: 1; transform-style: preserve-3d; }
+
+        .cta-btn { display: inline-block; padding: 12px 30px; border-radius: 30px; font-weight: 500; cursor: pointer; transition: background 0.3s, box-shadow 0.3s, transform 0.2s; }
+        .cta-btn:active { transform: scale(0.95); }
+        .primary-glow { background: var(--primary-accent); color: #fff; box-shadow: 0 0 15px var(--primary-accent); border: none; }
+        .primary-glow:hover { box-shadow: 0 0 25px var(--primary-accent); transform: translateY(-3px); }
+        .secondary-ghost { background: transparent; border: 2px solid var(--secondary-accent); color: var(--secondary-accent); }
+        .secondary-ghost:hover { background: rgba(255, 215, 0, 0.1); box-shadow: 0 0 15px var(--secondary-accent); }
+
+        /* --- Alpha Header Styles --- */
+        .alpha-header {
+            position: fixed;
+            top: 15px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: auto;
+            width: 90%;
+            max-width: 1400px;
+            z-index: 9999;
+            perspective: 1000px;
+            transition: var(--transition);
+        }
+        .header-container {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 8px 25px;
+            background: rgba(11, 12, 16, 0.6);
+            backdrop-filter: blur(25px) saturate(150%);
+            -webkit-backdrop-filter: blur(25px) saturate(150%);
+            border: 1px solid var(--glass-border);
+            border-radius: 100px;
+            gap: 40px;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.6), inset 0 0 10px rgba(255, 215, 0, 0.1);
+            animation: header-pulse 4s infinite ease-in-out;
+        }
+        @media (min-width: 851px) {
+            .alpha-header { width: auto; min-width: 350px; top: 20px; }
+        }
+        @keyframes header-pulse {
+            0%, 100% { border-color: var(--glass-border); box-shadow: 0 15px 35px rgba(0,0,0,0.6); }
+            50% { border-color: var(--primary-accent); box-shadow: 0 15px 35px rgba(0,0,0,0.6), 0 0 15px rgba(255, 0, 0, 0.3); }
+        }
+        .alpha-header.is-scrolled {
+            top: 0;
+            width: 100%;
+            min-width: 100%;
+        }
+        .alpha-header.is-scrolled .header-container {
+            border-radius: 0;
+            border-left: none; border-right: none; border-top: none;
+            background: rgba(0, 0, 0, 0.95);
+            padding: 12px 60px;
+            animation: none;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.5);
+        }
+        .nav-logo {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: transform 0.3s ease;
+        }
+        .nav-logo:hover { transform: scale(1.05); }
+        .nav-logo:hover .logo-img {
+            filter: brightness(0) invert(1) drop-shadow(0 0 15px var(--primary-accent));
+        }
+        
+        .logo-img {
+            height: clamp(40px, 8vw, 65px);
+            width: auto;
+            filter: brightness(0) invert(1); /* جعل الشعار أبيض تماماً */
+            transition: height 0.4s ease, filter 0.3s ease;
+        }
+
+        .alpha-header.is-scrolled .logo-img {
+            height: clamp(35px, 8vw, 50px);
+        }
+
+        .nav-menu { display: flex; gap: 5px; }
+        @media (min-width: 851px) { .nav-menu { display: flex !important; } }
+        .nav-menu .mag-item {
+            position: relative;
+            padding: 8px 18px;
+            color: var(--text-color-light);
+            font-size: clamp(0.85rem, 2vw, 1.05rem);
+            font-weight: 700;
+            transition: color 0.3s, background 0.3s, transform 0.1s;
+            border-radius: 50px;
+            display: inline-block;
+            letter-spacing: 0.5px;
+            white-space: nowrap;
+        }
+        .mag-item:hover { color: #fff; text-shadow: 0 0 10px var(--primary-accent); }
+        .nav-tools { display: flex; align-items: center; gap: 15px; }
+        .search-trigger { background: transparent; border: none; color: var(--secondary-accent); cursor: pointer; font-size: 1.2rem; transition: transform 0.3s; }
+        .search-trigger:hover { transform: scale(1.2) rotate(10deg); }
+        .mobile-toggle { display: none; flex-direction: column; gap: 6px; cursor: pointer; }
+        .mobile-toggle span { width: 25px; height: 2px; background: var(--primary-accent); transition: var(--transition); }
+        .mobile-toggle.open span:nth-child(1) { transform: rotate(45deg) translate(5px, 5px); }
+        .mobile-toggle.open span:nth-child(2) { transform: rotate(-45deg) translate(6px, -7px); }
+
+        @media (max-width: 850px) {
+            .nav-menu {
+                position: fixed;
+                top: 0;
+                right: -100%;
+                width: 100%;
+                height: 100vh;
+                background: rgba(0, 0, 0, 0.95);
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+                transition: right 0.5s cubic-bezier(0.85, 0, 0.15, 1);
+                backdrop-filter: blur(30px);
+                z-index: 10000;
+                gap: 30px;
+            }
+            .nav-menu.active { right: 0; }
+
+            .close-nav {
+                display: block !important;
+                position: absolute;
+                top: 30px;
+                left: 30px;
+                background: none;
+                border: none;
+                color: var(--primary-accent);
+                font-size: 3rem;
+                cursor: pointer;
+                line-height: 1;
+                text-shadow: 0 0 15px var(--primary-accent);
+            }
+
+            .mag-item { font-size: 2rem; padding: 10px 40px; width: 80%; text-align: center; white-space: normal; }
+            .mobile-toggle { display: flex; }
+            .header-container { gap: 15px; padding: 10px 20px; border-radius: 50px; }
+            .alpha-header.is-scrolled .header-container { border-radius: 0; padding: 10px 20px; }
+        }
+
+        .close-nav { display: none; }
+
+        /* 1. HERO SECTION */
+        #hero { position: relative; }
+        .hero-content { position: relative; z-index: 2; text-align: center; }
+        .hero-image-container {
+            position: relative;
+            width: 320px;
+            height: 380px;
+            margin: 0 auto 30px;
+            z-index: 3;
+        }
+        .hero-profile-img {
+            width: 100%;
+            height: 100%;
+            border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%;
+            border: 4px solid var(--secondary-accent);
+            box-shadow: 0 0 20px var(--primary-accent);
+            object-fit: cover;
+            animation: morph 6s ease-in-out infinite, hero-float 4s ease-in-out infinite;
+            transition: all 0.5s ease;
+        }
+        .hero-profile-img:hover {
+            transform: scale(1.05) rotate(2deg);
+            box-shadow: 0 0 40px var(--primary-accent);
+            border-color: var(--primary-accent);
+        }
+        @keyframes morph {
+            0% { border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%; transform: rotate(0deg); }
+            33% { border-radius: 50% 50% 30% 70% / 50% 30% 70% 50%; transform: rotate(3deg) scaleX(1.1); }
+            66% { border-radius: 70% 30% 50% 50% / 30% 70% 50% 70%; transform: rotate(-3deg) scaleY(1.1); }
+            100% { border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%; transform: rotate(0deg); }
+        }
+        @keyframes hero-float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-15px); } }
+        .hero-title { font-size: 3.5rem; line-height: 1.2; margin-bottom: 20px; animation: glow 2s ease-in-out infinite alternate; color: var(--text-color-bright); position: relative; z-index: 10; }
+        .hero-subtitle { font-size: 1.5rem; color: var(--secondary-accent); margin-bottom: 40px; }
+        .hero-ctas { display: flex; gap: 20px; justify-content: center; }
+        
+        /* Disintegration Animation */
+        @keyframes disintegrate {
+            0% { opacity: 1; transform: translateY(0) scale(1); filter: blur(0); }
+            100% { opacity: 0; transform: translateY(-40px) scale(1.3); filter: blur(20px); }
+        }
+
+        @media (max-width: 768px) {
+            .full-vh { padding: 40px 15px; }
+            .hero-image-container { width: 220px; height: 280px; }
+            .hero-title { font-size: 2.5rem; }
+            .hero-subtitle { font-size: 1.1rem; }
+            .hero-ctas { flex-direction: column; width: 80%; margin: 0 auto; }
+            .about-cards-container { flex-direction: column; }
+            .stats-banner { flex-direction: column; padding: 20px 0; }
+            .about-3d-wrapper { height: 300px; margin-top: -30px; }
+            .works-slider { flex-direction: column; align-items: center; overflow-x: hidden; width: 100%; padding: 0; }
+            
+            /* Expandable Cards Logic */
+            .project-slide { flex: 0 0 auto; width: 100%; max-width: 100%; margin-bottom: 20px; cursor: pointer; transition: transform 0.3s ease; }
+            .project-details .project-desc, 
+            .project-details .project-tech, 
+            .project-details .cta-btn { 
+                max-height: 0; opacity: 0; overflow: hidden; transition: all 0.4s ease; margin: 0; 
+            }
+            .project-slide.is-expanded .project-details .project-desc, 
+            .project-slide.is-expanded .project-details .project-tech, 
+            .project-slide.is-expanded .project-details .cta-btn { 
+                max-height: 500px; opacity: 1; margin-top: 15px; 
+            }
+            .project-slide h3::after { content: ' ▼'; font-size: 0.8rem; transition: transform 0.3s; display: inline-block; color: var(--primary-accent); }
+            .project-slide.is-expanded h3::after { transform: rotate(180deg); }
+
+            .skills-grid { grid-template-columns: repeat(3, 1fr); gap: 8px; width: 100%; padding: 0 5px; }
+            .skill-item { padding: 8px 2px; width: auto; min-height: 80px; }
+            .skill-item img { width: 30px; height: 30px; }
+            .skill-item p { font-size: 0.7rem; letter-spacing: -0.5px; }
+            .skill-item { animation: morph-mobile 7s ease-in-out infinite alternate; }
+        }
+        @media (max-width: 480px) {
+            .skills-grid { grid-template-columns: repeat(3, 1fr); gap: 5px; }
+            .skill-item { padding: 5px 2px; min-height: 70px; }
+            .skill-item img { width: 25px; height: 25px; }
+            .skill-item p { font-size: 0.6rem; margin-top: 5px; }
+        }
+
+        @keyframes glow {
+            from { text-shadow: 0 0 5px var(--primary-accent), 0 0 10px var(--primary-accent); }
+            to { text-shadow: 0 0 20px var(--primary-accent), 0 0 30px var(--secondary-accent); }
+        }
+
+        /* نسخة مخففة من المورف للموبايل لمنع التداخل */
+        @keyframes morph-mobile {
+            0% { border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%; transform: rotate(0deg); }
+            50% { border-radius: 50% 50% 30% 70% / 50% 30% 70% 50%; transform: rotate(2deg) scale(1.02); }
+            100% { border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%; transform: rotate(0deg); }
+        }
+
+        /* Stats Pulse Animation */
+        @keyframes number-pulse {
+            0% { transform: translateZ(50px) scale(1); }
+            50% { transform: translateZ(80px) scale(1.1); text-shadow: 0 0 40px var(--primary-accent); }
+            100% { transform: translateZ(50px) scale(1); }
+        }
+        .pulse-active { animation: number-pulse 2s infinite ease-in-out; }
+
+        /* 2. ABOUT ME */
+        .about-cards-container { display: flex; gap: 30px; max-width: 1000px; margin: 0 auto; justify-content: center; }
+        .about-3d-wrapper { width: 100%; height: 450px; margin: 0 auto; position: relative; z-index: 2; }
+        .about-3d-wrapper:active { cursor: grabbing; } /* Cursor for 3D model interaction */
+        #about-3d-canvas { width: 100%; height: 100%; outline: none; }
+        .iridescent-card { flex: 1; text-align: center; border-radius: 20px; transition: transform 0.3s ease; }
+        .profile-img { width: 150px; height: 150px; border-radius: 50%; border: 3px solid var(--primary-accent); box-shadow: 0 0 15px var(--primary-accent); margin-bottom: 20px; }
+        .about-text { font-size: 0.9rem; line-height: 1.6; color: var(--text-color-light); }
+        /* Removed simple float-up to avoid conflict with Tilt */
+
+        /* 3. TECH STACK */
+        .skills-grid { 
+            display: grid; 
+            grid-template-columns: repeat(auto-fit, minmax(130px, 1fr)); 
+            gap: 30px; 
+            max-width: 900px; 
+            margin: 0 auto; 
+        }
+        .skill-item { 
+            text-align: center; 
+            padding: 30px 15px;
+            background: linear-gradient(135deg, #4285f4, #9b72cb, #d96570);
+            border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%;
+            animation: morph 7s ease-in-out infinite alternate;
+            transition: transform 0.4s, box-shadow 0.4s;
+            border: none;
+            box-shadow: 0 10px 20px rgba(155, 114, 203, 0.3);
+        }
+        .skill-item:hover { 
+            transform: scale(1.1) rotate(5deg);
+            box-shadow: 0 15px 30px rgba(66, 133, 244, 0.5);
+            animation-play-state: paused;
+        }
+        .skill-item img { 
+            width: 60px; 
+            height: 60px; 
+            margin-bottom: 10px; 
+            filter: brightness(0) invert(1); /* جعل الشعار أبيض لاحترافية أعلى */
+            transition: transform 0.3s;
+        }
+        .skill-item p {
+            color: #000;
+            font-weight: 700;
+            margin: 0;
+            font-size: 1rem;
+            overflow-wrap: anywhere;
+            line-height: 1.2;
+            padding-top: 5px;
+        }
+
+        /* 4. MASTERPIECES (Works) */
+        .works-slider { display: flex; gap: 30px; max-width: 1200px; margin: 0 auto; overflow-x: auto; padding-bottom: 20px; }
+        .project-slide { flex: 0 0 450px; display: flex; flex-direction: column; overflow: hidden; }
+        .project-media { height: 250px; background-size: cover; background-position: center; border-bottom: 1px solid var(--glass-border); }
+        .project-details { padding: 20px; }
+        .project-desc { font-size: 0.9rem; line-height: 1.6; margin-bottom: 15px; }
+        .project-tech { font-size: 0.8rem; color: var(--secondary-accent); margin-bottom: 20px; }
+        .swiper-wrapper { display: flex; } /* Simplification for swiper structure */
+        .swiper-slide { border-radius: 15px; overflow: hidden; }
+
+        /* 5. LIVE STATS */
+        .stats-banner { display: flex; gap: 30px; justify-content: center; max-width: 1000px; margin: 0 auto; padding: 30px 20px; }
+        .stat-card { flex: 1; text-align: center; padding: 40px 20px !important; }
+        .stat-number { 
+            font-size: 3.5rem; 
+            font-weight: 700; 
+            color: var(--primary-accent); 
+            margin-bottom: 10px; 
+            transform: translateZ(50px); /* 3D Pop effect */
+            text-shadow: 0 0 20px rgba(255, 0, 0, 0.5);
+        }
+        .stat-card p { transform: translateZ(30px); color: var(--text-color-bright); font-weight: 700; }
+
+        /* --- Improved Contact Portal Styles --- */
+        .contact-section { padding: 100px 5%; background: var(--bg-color); }
+        .contact-container { display: flex; justify-content: center; margin: 0 auto; direction: rtl; }
+        
+        .contact-methods { display: flex; flex-direction: column; gap: 15px; margin-top: 25px; }
+        .method-item {
+            display: flex; align-items: center; gap: 20px; padding: 15px 25px;
+            background: rgba(255, 255, 255, 0.05); border-radius: 20px;
+            text-decoration: none; color: #fff; transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            border: 1px solid transparent;
+        }
+        .method-item:hover { background: rgba(255, 255, 255, 0.08); transform: scale(1.02) translateX(-10px); }
+        
+        .method-item .icon { width: 45px; height: 45px; display: flex; align-items: center; justify-content: center; border-radius: 12px; }
+        .whatsapp-icon { background: var(--whatsapp); box-shadow: 0 0 15px rgba(37, 211, 102, 0.4); }
+        .messenger-icon { background: var(--messenger); box-shadow: 0 0 15px rgba(0, 132, 255, 0.4); }
+        
+        .social-pills { display: flex; gap: 12px; margin-top: 30px; flex-wrap: wrap; }
+        .pill {
+            display: flex; align-items: center; gap: 8px; padding: 10px 20px;
+            border-radius: 50px; text-decoration: none; color: #fff; font-size: 0.9rem;
+            background: rgba(255, 255, 255, 0.05); border: 1px solid var(--glass-border); transition: 0.3s;
+        }
+        .pill:hover { transform: translateY(-3px); background: var(--accent); color: #fff; box-shadow: 0 5px 15px var(--accent); }
+        .pill.fb:hover { background: var(--fb); color: #fff; box-shadow: 0 5px 15px var(--fb); }
+        .pill.yt:hover { background: var(--yt); color: #fff; box-shadow: 0 5px 15px var(--yt); }
+        .pill.ins:hover { background: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%); color: #fff; box-shadow: 0 5px 15px rgba(220, 39, 67, 0.4); }
+
+        @media (max-width: 900px) { .contact-container { flex-direction: column; align-items: center; } }
+
+        /* FOOTER */
+        footer { padding: 40px 20px; background: #000; border-top: 2px solid var(--primary-accent); text-align: center; }
+
+        /* --- Contact Unified Style --- */
+        .contact-social-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            justify-content: center;
+            margin-top: 25px;
+        }
+        .contact-icon-link.mag-item {
+            width: 65px;
+            height: 65px;
+            display: flex !important; /* لضمان عدم تأثره بـ inline-block */
+            align-items: center;
+            justify-content: center;
+            padding: 0 !important; /* حذف الـ padding الموروث من mag-item */
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid var(--glass-border);
+            border-radius: 50%;
+            color: #fff !important;
+            font-size: 1.8rem;
+            transition: var(--transition);
+            position: relative;
+        }
+        .contact-icon-link.mag-item:hover {
+            background: var(--accent);
+            color: #fff;
+            box-shadow: 0 0 20px var(--accent);
+            border-color: var(--accent);
+        }
+        .contact-icon-link svg { width: 30px; height: 30px; display: block; }
+    </style>
+</head>
+<body class="dark-mode">
+
+    <header class="alpha-header" id="mainHeader">
+        <div class="header-container">
+            <a href="#" class="nav-logo">
+                <img src="bx-nest-js.svg" alt="NestJS Logo" class="logo-img">
+            </a>
+
+            <nav class="nav-menu" id="navMenu">
+                <a href="#hero" class="mag-item">الرئيسية</a>
+                <a href="#about" class="mag-item">من أنا</a>
+                <a href="#stack" class="mag-item">الترسانة التقنية</a>
+                <a href="#works" class="mag-item">أعمالي</a>
+                <a href="#contact" class="mag-item">تواصل</a>
+            </nav>
+
+            <div class="nav-tools">
+                <div class="mobile-toggle" id="mobileToggle">
+                    <span></span>
+                    <span></span>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <div id="preloader">
+        <div class="loader-content">
+            <h1 class="loader-text">Abqarieno</h1>
+            <div class="loading-bar-container"><div class="loading-bar"></div><span class="loading-percentage">0%</span></div>
+        </div>
+    </div>
+
+    <main id="main-content" style="opacity: 0; visibility: hidden; transition: opacity 0.5s;">
+
+        <section id="hero" class="full-vh">
+            <div class="hero-content">
+                <div class="hero-image-container">
+                    <img src="PM.jpeg" alt="مصطفى أبو طالب" class="hero-profile-img">
+                </div>
+                <h1 class="hero-title neon-text">مرحباً، أنا مصطفى أبو طالب</h1>
+                <h2 class="hero-subtitle">مطور واجهات الويب ومصمم تجارب رقمية — <span style="color:var(--primary-accent)">Abqarieno</span></h2>
+                <div class="hero-ctas">
+                    <a href="#works" class="cta-btn primary-glow">استكشف أعمالي</a>
+                    <a href="#contact" class="cta-btn secondary-ghost">تواصل معي</a>
+                </div>
+            </div>
+        </section>
+
+        <section id="about" class="full-vh reveal-on-scroll glass-bg">
+            <h2 class="section-title">من أنا؟</h2>
+            <div class="about-cards-container">
+                <div class="iridescent-card glass-card" data-tilt>
+                    <div class="card-glow"></div>
+                    <div class="card-content">
+                        <h3 style="color: var(--primary-accent); margin-bottom: 15px;">شغف التكويد</h3>
+                        <p class="about-text">بدأت رحلتي من فضول بسيط حول كيفية بناء العالم الرقمي، لتتحول اليوم إلى احترافية في تحويل الأفكار المعقدة إلى أكواد برمجية ذكية وسلسة تخدم المستخدم النهائي.</p>
+                    </div>
+                </div>
+                <div class="iridescent-card glass-card" data-tilt>
+                    <div class="card-glow"></div>
+                    <div class="card-content">
+                        <h3 style="color: var(--secondary-accent);">القيادة</h3>
+                        <p class="about-text">إبراز الدور الإداري (كمدير دفعة) وكيف تساهم التكنولوجيا في تنظيم حياة الطلاب وإدارة المحتوى التعليمي.</p>
+                    </div>
+                </div>
+                <div class="iridescent-card glass-card" data-tilt>
+                    <div class="card-glow"></div>
+                    <div class="card-content">
+                        <h3 style="color: var(--secondary-accent);">الاهتمام بالتفاصيل</h3>
+                        <p class="about-text">لمسة إنسانية خفيفة عن الاهتمام بالتفاصيل، وكيف يساهم النظام الرياضي والـ Fitness في صفاء الذهن وكتابة كود نظيف.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="stack" class="full-vh reveal-on-scroll grid-layout">
+            <h2 class="section-title">الترسانة التقنية</h2>
+            <div class="skills-grid">
+                <div class="skill-item glass-card tech-orb">
+                    <img src="bx-android.svg" alt="Android">
+                    <p>Android</p>
+                </div>
+                <div class="skill-item glass-card tech-orb">
+                    <img src="bx-chrome.svg" alt="Chrome">
+                    <p>Web</p>
+                </div>
+                <div class="skill-item glass-card tech-orb">
+                    <img src="bx-visual-studio.svg" alt="Visual Studio Code">
+                    <p>VS Code</p>
+                </div>
+                <div class="skill-item glass-card tech-orb">
+                    <img src="bx-gemini.svg" alt="Google Gemini">
+                    <p>Gemini AI</p>
+                </div>
+                <div class="skill-item glass-card tech-orb">
+                    <img src="bx-openai.svg" alt="OpenAI">
+                    <p>OpenAI</p>
+                </div>
+                <div class="skill-item glass-card tech-orb">
+                    <img src="bx-anthropic.svg" alt="Anthropic">
+                    <p>Claude</p>
+                </div>
+                <div class="skill-item glass-card tech-orb">
+                    <img src="bx-perplexity-ai.svg" alt="Perplexity AI">
+                    <p>Perplexity</p>
+                </div>
+                <div class="skill-item glass-card tech-orb">
+                    <img src="bx-github-copilot.svg" alt="GitHub Copilot">
+                    <p>Copilot</p>
+                </div>
+                <div class="skill-item glass-card tech-orb">
+                    <img src="bx-nest-js.svg" alt="Nest JS">
+                    <p>Nest JS</p>
+                </div>
+                <div class="skill-item glass-card tech-orb">
+                    <img src="bx-google-antigravity.svg" alt="Google Antigravity">
+                    <p>Antigravity</p>
+                </div>
+                <div class="skill-item glass-card tech-orb">
+                    <img src="bx-replit.svg" alt="Replit">
+                    <p>Replit</p>
+                </div>
+                <div class="skill-item glass-card tech-orb">
+                    <img src="bx-paypal.svg" alt="PayPal">
+                    <p>Payments</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="works" class="full-vh reveal-on-scroll">
+            <h2 class="section-title">معرض الأعمال</h2>
+            <div class="works-slider swiper-container">
+                <!-- Swiper wrapper and slides are simplified for this context -->
+                <div class="project-slide glass-card">
+                    <div class="project-media" style="background-image: url('12.png');"></div>
+                    <div class="project-details">
+                        <h3>Biology Master</h3>
+                        <p class="project-desc">منصة الدكتور عبدالله التعليمية - بناء نظام اختبارات متكامل وحسابات طلاب.</p>
+                        <p class="project-tech">JS + Firebase للمزامنة اللحظية</p>
+                        <a href="https://mostafa7html7-pixel.github.io/mrr/" target="_blank" class="cta-btn secondary-ghost">الرابط المباشر</a>
+                    </div>
+                </div>
+                <div class="project-slide glass-card">
+                    <div class="project-media" style="background-image: url('13.png');"></div>
+                    <div class="project-details">
+                        <h3>Mostafa Abu</h3>
+                        <p class="project-desc">مشروع استعراض مهارات وتصميم واجهات تفاعلية متطورة.</p>
+                        <p class="project-tech">HTML + CSS + JavaScript</p>
+                        <a href="https://mostafa7html7-pixel.github.io/Mostafa_Abu/" target="_blank" class="cta-btn secondary-ghost">الرابط المباشر</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="stats" class="reveal-on-scroll stats-banner">
+            <div class="stat-card iridescent-card glass-card" data-tilt>
+                <div class="card-glow"></div>
+                <div class="card-content">
+                    <div class="stat-number count-up" data-target="15">0</div>
+                    <p>مشاريع منجزة</p>
+                </div>
+            </div>
+            <div class="stat-card iridescent-card glass-card" data-tilt>
+                <div class="card-glow"></div>
+                <div class="card-content">
+                    <div class="stat-number count-up" data-target="50">0</div>
+                    <p>سطور كود (K+)</p>
+                </div>
+            </div>
+            <div class="stat-card iridescent-card glass-card" data-tilt>
+                <div class="card-glow"></div>
+                <div class="card-content">
+                    <div class="stat-number count-up" data-target="1000">0</div>
+                    <p>أكواب قهوة</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="contact" class="contact-section reveal-on-scroll">
+    <div class="contact-container">
+        <div class="contact-info iridescent-card glass-card" data-tilt style="max-width: 600px; width: 100%;">
+            <div class="card-glow"></div>
+            <div class="card-content">
+            <div class="status-badge"><span class="status-dot"></span> متوفر حالياً لمشاريعك العبقرية ⚡</div>
+            <h2 class="section-title">دعنا نبني <span>المستقبل</span> معاً 🚀</h2>
+            <p class="contact-desc">أنا لا أكتب مجرد كود، أنا أصنع تجارب رقمية. تواصل معي عبر المنصات التالية: 💻</p>
+            
+            <div class="contact-social-grid">
+                <a href="https://wa.me/201158606601" class="mag-item contact-icon-link" target="_blank" title="WhatsApp">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L0 24l6.335-1.662c1.72.937 3.659 1.431 5.63 1.432h.006c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+                </a>
+                <a href="https://m.me/100087416461594" class="mag-item contact-icon-link" target="_blank" title="Messenger">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M12 3c-4.92 0-8.91 3.729-8.91 8.332 0 2.616 1.291 4.952 3.311 6.479V21l3.041-1.687c.811.228 1.668.35 2.559.35 4.92 0 8.91-3.73 8.91-8.331C20.91 6.729 16.92 3 12 3m.938 11.172-2.305-2.394-4.438 2.454 4.865-5.163 2.305 2.395 4.439-2.455z"></path></svg>
+                </a>
+                <a href="https://accountscenter.facebook.com/profiles/100087416461594/" class="mag-item contact-icon-link" target="_blank" title="Facebook">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.06c-5.5 0-10 4.5-10 10 0 4.94 3.61 9.06 8.33 9.89l.06-.05h-.06v-7.06h-2.5v-2.78h2.5V9.84c0-2.5 1.61-3.89 3.89-3.89.72 0 1.5.11 2.22.22v2.56h-1.28c-1.22 0-1.5.61-1.5 1.39v1.94h2.67l-.44 2.78h-2.22v7.06h-.06l.06.05c4.72-.83 8.33-4.94 8.33-9.89 0-5.5-4.5-10-10-10"></path></svg>
+                </a>
+                <a href="http://www.youtube.com/@Mostafa-Abqarieno" class="mag-item contact-icon-link" target="_blank" title="YouTube">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M21.593 7.203a2.5 2.5 0 0 0-1.762-1.766C18.265 5.007 12 5 12 5s-6.264-.007-7.831.404a2.56 2.56 0 0 0-1.766 1.778c-.413 1.566-.417 4.814-.417 4.814s-.004 3.264.406 4.814c.23.857.905 1.534 1.763 1.765 1.582.43 7.83.437 7.83.437s6.265.007 7.831-.403a2.52 2.52 0 0 0 1.767-1.763c.414-1.565.417-4.812.417-4.812s.02-3.265-.407-4.831M9.996 15.005l.005-6 5.207 3.005z"></path></svg>
+                </a>
+                <a href="https://www.instagram.com/mostafa7pubg7/#" class="mag-item contact-icon-link" target="_blank" title="Instagram">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M20.947 8.305a6.5 6.5 0 0 0-.419-2.216 4.6 4.6 0 0 0-2.633-2.633 6.6 6.6 0 0 0-2.186-.42c-.962-.043-1.267-.055-3.709-.055s-2.755 0-3.71.055a6.6 6.6 0 0 0-2.185.42 4.6 4.6 0 0 0-2.633 2.633 6.6 6.6 0 0 0-.419 2.185c-.043.963-.056 1.268-.056 3.71s0 2.754.056 3.71c.015.748.156 1.486.419 2.187a4.6 4.6 0 0 0 2.634 2.632 6.6 6.6 0 0 0 2.185.45c.963.043 1.268.056 3.71.056s2.755 0 3.71-.056a6.6 6.6 0 0 0 2.186-.419 4.62 4.62 0 0 0 2.633-2.633c.263-.7.404-1.438.419-2.187.043-.962.056-1.267.056-3.71-.002-2.442-.002-2.752-.058-3.709m-8.953 8.297c-2.554 0-4.623-2.069-4.623-4.623s2.069-4.623 4.623-4.623a4.623 4.623 0 0 1 0 9.246m4.807-8.339a1.077 1.077 0 0 1-1.078-1.078 1.077 1.077 0 1 1 2.155 0c0 .596-.482 1.078-1.077 1.078"></path><path d="M11.994 8.976a3.003 3.003 0 1 0 0 6.006 3.003 3.003 0 1 0 0-6.006"></path></svg>
+                </a>
+                <a href="https://mostafa7html7-pixel.github.io" class="mag-item contact-icon-link" target="_blank" title="GitHub">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.835 2.809 1.305 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.046.138 3.003-.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
+                </a>
+                <a href="https://www.linkedin.com/in/mustafa-talib-abou-gabal-561b3b271/" class="mag-item contact-icon-link" target="_blank" title="LinkedIn">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M4.983 2.821a2.188 2.188 0 1 0 0 4.376 2.188 2.188 0 1 0 0-4.376m4.254 6.034v12.139h3.769v-6.003c0-1.584.298-3.118 2.262-3.118 1.937 0 1.961 1.811 1.961 3.218v5.904H21v-6.657c0-3.27-.704-5.783-4.526-5.783-1.835 0-3.065 1.007-3.568 1.96h-.051v-1.66zm-6.142 0H6.87v12.139H3.095z"></path></svg>
+                </a>
+                <a href="mailto:karamlatofficialm@gmail.com" class="mag-item contact-icon-link" title="Gmail">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="m18.73 5.41-1.28 1L12 10.46 6.55 6.37l-1.28-1A2 2 0 0 0 2 7.05v11.59A1.36 1.36 0 0 0 3.36 20h3.19v-7.72L12 16.37l5.45-4.09V20h3.19A1.36 1.36 0 0 0 22 18.64V7.05a2 2 0 0 0-3.27-1.64"></path></svg>
+                </a>
+            </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+        <div class="about-3d-wrapper"><canvas id="about-3d-canvas"></canvas></div>
+
+    <footer>
+        <p class="footer-copy">صُنع بشغف وكود نظيف بواسطة Abqarieno © 2026</p>
+        <div class="footer-links">
+            <a href="https://mostafa7html7-pixel.github.io" target="_blank" title="GitHub"><svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.835 2.809 1.305 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.046.138 3.003.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg></a>
+            <a href="https://www.linkedin.com/in/mustafa-talib-abou-gabal-561b3b271/" target="_blank" title="LinkedIn">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="25" height="25" fill="currentColor"><path d="M4.983 2.821a2.188 2.188 0 1 0 0 4.376 2.188 2.188 0 1 0 0-4.376m4.254 6.034v12.139h3.769v-6.003c0-1.584.298-3.118 2.262-3.118 1.937 0 1.961 1.811 1.961 3.218v5.904H21v-6.657c0-3.27-.704-5.783-4.526-5.783-1.835 0-3.065 1.007-3.568 1.96h-.051v-1.66zm-6.142 0H6.87v12.139H3.095z"></path></svg>
+            </a>
+            <a href="https://www.youtube.com/@abqarieno-موقعالبيولوجي" target="_blank" title="YouTube">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="25" height="25" fill="currentColor"><path d="M21.593 7.203a2.5 2.5 0 0 0-1.762-1.766C18.265 5.007 12 5 12 5s-6.264-.007-7.831.404a2.56 2.56 0 0 0-1.766 1.778c-.413 1.566-.417 4.814-.417 4.814s-.004 3.264.406 4.814c.23.857.905 1.534 1.763 1.765 1.582.43 7.83.437 7.83.437s6.265.007 7.831-.403a2.52 2.52 0 0 0 1.767-1.763c.414-1.565.417-4.812.417-4.812s.02-3.265-.407-4.831M9.996 15.005l.005-6 5.207 3.005z"></path></svg>
+            </a>
+            <a href="mailto:karamlatofficialm@gmail.com" title="Email">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="25" height="25" fill="currentColor"><path d="m18.73 5.41-1.28 1L12 10.46 6.55 6.37l-1.28-1A2 2 0 0 0 2 7.05v11.59A1.36 1.36 0 0 0 3.36 20h3.19v-7.72L12 16.37l5.45-4.09V20h3.19A1.36 1.36 0 0 0 22 18.64V7.05a2 2 0 0 0-3.27-1.64"></path></svg>
+            </a>
+            <a href="tel:+201017834789" title="WhatsApp">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="25" height="25" fill="currentColor"><path fill-rule="evenodd" d="M18.403 5.633A8.92 8.92 0 0 0 12.053 3c-4.948 0-8.976 4.027-8.978 8.977 0 1.582.413 3.126 1.198 4.488L3 21.116l4.759-1.249a9 9 0 0 0 4.29 1.093h.004c4.947 0 8.975-4.027 8.977-8.977a8.93 8.93 0 0 0-2.627-6.35m-6.35 13.812h-.003a7.45 7.45 0 0 1-3.798-1.041l-.272-.162-2.824.741.753-2.753-.177-.282a7.45 7.45 0 0 1-1.141-3.971c.002-4.114 3.349-7.461 7.465-7.461a7.4 7.4 0 0 1 5.275 2.188 7.42 7.42 0 0 1 2.183 5.279c-.002 4.114-3.349 7.462-7.461 7.462m4.093-5.589c-.225-.113-1.327-.655-1.533-.73s-.354-.112-.504.112-.58.729-.711.879-.262.168-.486.056-.947-.349-1.804-1.113c-.667-.595-1.117-1.329-1.248-1.554s-.014-.346.099-.458c.101-.1.224-.262.336-.393s.149-.224.224-.374.038-.281-.019-.393c-.056-.113-.505-1.217-.692-1.666-.181-.435-.366-.377-.504-.383a10 10 0 0 0-.429-.008.83.83 0 0 0-.599.28c-.206.225-.785.767-.785 1.871s.804 2.171.916 2.321 1.582 2.415 3.832 3.387c.536.231.954.369 1.279.473.537.171 1.026.146 1.413.089.431-.064 1.327-.542 1.514-1.066s.187-.973.131-1.067-.207-.151-.43-.263" clip-rule="evenodd"></path></svg>
+            </a>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const preloader = document.getElementById('preloader');
+            const mainContent = document.getElementById('main-content');
+            const loadingBar = preloader.querySelector('.loading-bar');
+            const percentageText = preloader.querySelector('.loading-percentage');
+            
+            // --- ALPHA HEADER LOGIC ---
+            const header = document.getElementById('mainHeader');
+            window.addEventListener('scroll', () => {
+                if (window.scrollY > 80) {
+                    header.classList.add('is-scrolled');
+                } else {
+                    header.classList.remove('is-scrolled');
+                }
+            });
+
+            const toggle = document.getElementById('mobileToggle');
+            const menu = document.getElementById('navMenu');
+            toggle.addEventListener('click', () => {
+                menu.classList.toggle('active');
+                toggle.classList.toggle('open');
+            });
+            menu.querySelectorAll('a').forEach(link => {
+                link.addEventListener('click', () => {
+                    menu.classList.remove('active');
+                    toggle.classList.remove('open');
+                });
+            });
+
+            // Magnetic Effect
+            const items = document.querySelectorAll('.mag-item');
+            items.forEach(item => {
+                item.addEventListener('mousemove', (e) => {
+                    const position = item.getBoundingClientRect();
+                    const x = e.clientX - position.left - position.width / 2;
+                    const y = e.clientY - position.top - position.height / 2;
+                    item.style.transform = `translate(${x * 0.15}px, ${y * 0.15}px)`;
+                });
+                item.addEventListener('mouseout', () => {
+                    item.style.transform = `translate(0px, 0px)`;
+                    item.style.transition = 'all 0.5s cubic-bezier(0.23, 1, 0.32, 1)';
+                    setTimeout(() => item.style.transition = '', 500);
+                });
+            });
+
+            // --- 1. PRELOADER LOGIC ---
+            // Simulate assets loading (0 to 100%)
+            let progress = 0;
+            const preloadInterval = setInterval(() => {
+                progress += Math.floor(Math.random() * 10) + 5;
+                if (progress >= 100) {
+                    progress = 100;
+                    clearInterval(preloadInterval);
+                    hidePreloader();
+                }
+                loadingBar.style.width = `${progress}%`;
+                percentageText.innerText = `${progress}%`;
+            }, 100);
+
+            function hidePreloader() {
+                preloader.style.opacity = '0';
+                preloader.style.visibility = 'hidden';
+                mainContent.style.opacity = '1';
+                mainContent.style.visibility = 'visible';
+                
+                // التأكد من تهيئة الصفحة والمجسم بعد ظهور المحتوى
+                setTimeout(() => {
+                    initializePage();
+                }, 100);
+            }
+
+            // --- 2. INITIALIZE PAGE FEATURES ---
+            function initializePage() {
+                // Initialize Reveal on Scroll (Intersection Observer)
+                const revealElements = document.querySelectorAll('.reveal-on-scroll');
+                const observer = new IntersectionObserver((entries) => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting) {
+                            entry.target.classList.add('active');
+                            // Concept: Trigger count-up on Stats banner elements
+                            if (entry.target.id === 'stats') {
+                                startCountUpAnimations();
+                            }
+                        }
+                    });
+                }, { threshold: 0.1 });
+
+                revealElements.forEach(el => observer.observe(el));
+
+                // --- 3D IRIDESCENT CARDS LOGIC (About & Stats) ---
+                VanillaTilt.init(document.querySelectorAll(".iridescent-card"), {
+                    max: 10,
+                    speed: 400,
+                    glare: true,
+                    "max-glare": 0.3,
+                    scale: 1.02
+                });
+
+                document.querySelectorAll(".iridescent-card").forEach(card => {
+                    card.addEventListener("mousemove", (e) => {
+                        const rect = card.getBoundingClientRect();
+                        const x = e.clientX - rect.left;
+                        const y = e.clientY - rect.top;
+                        card.style.setProperty("--mouse-x", `${x}px`);
+                        card.style.setProperty("--mouse-y", `${y}px`);
+                    });
+                });
+
+                // تشغيل المجسم فوراً بعد انتهاء التحميل
+                if (window.initHero3D) window.initHero3D();
+            }
+
+            // --- 5. STATS COUNT-UP ANIMATION ---
+            function startCountUpAnimations() {
+                const countUps = document.querySelectorAll('.count-up');
+                countUps.forEach(count => {
+                    const target = +count.getAttribute('data-target');
+                    const update = () => {
+                        const value = +count.innerText;
+                        const increment = target / 50; // Faster speed
+                        if (value < target) {
+                            count.innerText = Math.ceil(value + increment);
+                            setTimeout(update, 30);
+                        } else {
+                            count.innerText = target;
+                            count.classList.add('pulse-active');
+                        }
+                    };
+                    update();
+                });
+            }
+
+            // --- 7. EXPANDABLE PROJECT CARDS (Mobile Only) ---
+            const projectCards = document.querySelectorAll('.project-slide');
+            projectCards.forEach(card => {
+                card.addEventListener('click', (e) => {
+                    if (window.innerWidth <= 768) {
+                        if (e.target.classList.contains('cta-btn')) return;
+                        card.classList.toggle('is-expanded');
+                        // Haptic Feedback
+                        if (navigator.vibrate) {
+                            navigator.vibrate(50); // Vibrate for 50ms
+                        }
+                    }
+                });
+            });
+        });
+    </script>
+
+    <script type="module">
+        import * as THREE from 'three';
+        import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
+        import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
+
+        window.initHero3D = function() {
+            const canvas = document.querySelector('#about-3d-canvas');
+            if (!canvas || canvas.dataset.loaded) return;
+            canvas.dataset.loaded = true;
+
+            // الحصول على الأبعاد الحقيقية بعد ظهور القسم
+            const width = canvas.clientWidth || window.innerWidth;
+            const height = canvas.clientHeight || window.innerHeight;
+
+            const scene = new THREE.Scene();
+            const camera = new THREE.PerspectiveCamera(75, width / height, 0.1, 1000);
+            const renderer = new THREE.WebGLRenderer({ canvas, alpha: true, antialias: true });
+            
+            renderer.setSize(width, height);
+            renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+
+            // إعداد التحكم الاحترافي
+            const controls = new OrbitControls(camera, renderer.domElement);
+            controls.enableDamping = true; // حركة ناعمة مرنة
+            controls.dampingFactor = 0.05;
+            controls.enableZoom = false; // تعطيل الزوم للحفاظ على الثبات
+            controls.autoRotate = false; // ترك التحكم للمستخدم بالكامل
+
+            const loader = new GLTFLoader();
+            loader.load('m.glb', (gltf) => {
+                const model = gltf.scene;
+                
+                // منطق الحساب التلقائي لاحتواء أي مجسم بدون قص
+                const box = new THREE.Box3().setFromObject(model);
+                const size = box.getSize(new THREE.Vector3());
+                const center = box.getCenter(new THREE.Vector3());
+                
+                const maxDim = Math.max(size.x, size.y, size.z);
+                // تكبير المجسم بشكل احترافي مع الحفاظ على التجاوب
+                const responsiveScale = window.innerWidth < 768 ? 4.5 : 5.5;
+                const scale = responsiveScale / maxDim;
+                model.scale.set(scale, scale, scale);
+                
+                // وضع المجسم في المركز تماماً
+                model.position.x = -center.x * scale;
+                model.position.y = -center.y * scale;
+                model.position.z = -center.z * scale;
+
+                scene.add(model);
+
+                let introRotation = 0;
+                const introSpeed = 0.05;
+                let flashTriggered = false;
+                let flashTime = 0;
+                const goldColor = new THREE.Color(0xFFD700);
+
+                const animate = () => {
+                    requestAnimationFrame(animate);
+                    // أنيميشن الدخول: دورة كاملة واحدة
+                    if (introRotation < Math.PI * 2) {
+                        model.rotation.y += introSpeed;
+                        introRotation += introSpeed;
+                    } else {
+                        if (!flashTriggered) {
+                            flashTriggered = true;
+                            introRotation = -1; // علامة لانتهاء الدوران
+                        }
+                        controls.update();
+                    }
+
+                    // منطق الوميض الذهبي (Golden Flash)
+                    if (flashTriggered && flashTime < 1) {
+                        flashTime += 0.04;
+                        const intensity = Math.sin(flashTime * Math.PI) * 8; // قوة الوميض
+                        
+                        model.traverse((node) => {
+                            if (node.isMesh) {
+                                node.material.emissive = goldColor;
+                                node.material.emissiveIntensity = intensity;
+                            }
+                        });
+                        dirLight.intensity = 2 + intensity;
+                        dirLight.color = goldColor;
+
+                        if (flashTime >= 1) {
+                            // إعادة الإضاءة للوضع الطبيعي بعد الوميض
+                            dirLight.intensity = 2;
+                            dirLight.color.set(0xffffff);
+                            model.traverse((node) => { if (node.isMesh) node.material.emissiveIntensity = 0; });
+                        }
+                    }
+                    renderer.render(scene, camera);
+                };
+                animate();
+            }, undefined, (error) => console.error('3D Load Error:', error));
+
+            // إضاءة أستوديو احترافية
+            const ambientLight = new THREE.AmbientLight(0xffffff, 1.5);
+            scene.add(ambientLight);
+            
+            const dirLight = new THREE.DirectionalLight(0xffffff, 2);
+            dirLight.position.set(5, 5, 5);
+            scene.add(dirLight);
+
+            camera.position.z = 8;
+
+            // تحديث الحجم عند تغيير نافذة المتصفح
+            window.addEventListener('resize', () => {
+                camera.aspect = canvas.clientWidth / canvas.clientHeight;
+                camera.updateProjectionMatrix();
+                renderer.setSize(canvas.clientWidth, canvas.clientHeight);
+                renderer.render(scene, camera);
+            });
+        };
+    </script>
+</body>
+</html>
